@@ -27,20 +27,17 @@ public:
 
     void insertLink()
     {
-        // w.appendHtml("<a
-        // href=\"https://doc.qt.io/qt-5/qplaintextedit.html\">QPlainTextEdit</a>\n");
         QTextCursor cursor = textCursor();
         normalFmt = cursor.charFormat();
+        
+        appendHtml("<a href=\"https://doc.qt.io/qt-5/qplaintextedit.html\">QPlainTextEdit</a>\n");
         // cursor.insertHtml("<a
         // href=\"https://doc.qt.io/qt-5/qplaintextedit.html\">QPlainTextEdit</a>\n");
-        QTextCharFormat fmt;
-        fmt.setAnchor(true);
-        // QStringList  names;
-        // names << "doc";
-        // fmt.setAnchorNames(names);
-        fmt.setAnchorHref("https://doc.qt.io");
-        cursor.insertText("this is a link", fmt);
-        cursor.insertText("\n", normalFmt);
+        // QTextCharFormat fmt;
+        // fmt.setAnchor(true);
+        // fmt.setAnchorHref("https://doc.qt.io");
+        // cursor.insertText("this is a link", fmt);
+//        cursor.insertText("\n", normalFmt);
     }
     void update() {
         appendPlainText("some more text from timer\n");
@@ -48,20 +45,20 @@ public:
 
     void mousePressEvent(QMouseEvent *e)
     {
-        // clickedAnchor = (e->button() == Qt::LeftButton) ? anchorAt(e->pos()) : QString();
-        //QPlainTextEdit::mousePressEvent(e);
+         clickedAnchor = (e->button() == Qt::LeftButton) ? anchorAt(e->pos()) : QString();
+    //     //QPlainTextEdit::mousePressEvent(e);
     }
 
     void mouseReleaseEvent(QMouseEvent *e)
     {
-        // if (e->button() == Qt::LeftButton && !clickedAnchor.isEmpty()) {
-        //     if (anchorAt(e->pos()) == clickedAnchor) {
-        //         QDesktopServices::openUrl(QUrl(clickedAnchor, QUrl::TolerantMode));
-        //         qDebug() << "CLICKED: " << clickedAnchor;
-        //     }
-        //     clickedAnchor.clear();
-        // }
-        // QPlainTextEdit::mouseReleaseEvent(e);
+        if (e->button() == Qt::LeftButton && !clickedAnchor.isEmpty()) {
+            if (anchorAt(e->pos()) == clickedAnchor) {
+                QDesktopServices::openUrl(QUrl(clickedAnchor, QUrl::TolerantMode));
+                qDebug() << "CLICKED: " << clickedAnchor;
+            }
+            clickedAnchor.clear();
+        }
+        QPlainTextEdit::mouseReleaseEvent(e);
         // textCursor().setCharFormat(normalFmt);
     }
 
